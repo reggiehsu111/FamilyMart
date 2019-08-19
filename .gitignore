@@ -3,3 +3,5 @@ data
 __pycahce__
 .DS_Store
 src/test.ipynb
+*.ipynb_checkpoints
+*.vscode

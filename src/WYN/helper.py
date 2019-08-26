@@ -3,12 +3,23 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-class transoformer():
-    def __init__(self, file_name):
-
-        self.file_name = file_name
-        self.type = self.file_name[-12:-10]
+class helper():
+    def __init__(self, args):
+        
+        self.file_name = args.input
+        self.is_transform = args.transform
+        self.is_correlate = args.correlation
+        
         self.df = pd.read_csv(self.file_name, sep='\t')
+
+    def run(self):
+
+        print(self.is_transform, self.is_correlate)
+
+        if self.is_transform:
+            self.type = self.file_name[-12:-10]
+            self.transform()
+            self.write()
 
     def transform(self):
 
@@ -27,7 +38,10 @@ class transoformer():
         for i, (shop_code, product_code, date) in enumerate(indexes):
 
             if shop_code != prev_shop_code or product_code != prev_product_code:
-                self.transformed_table.append([0 for i in range(365+2)]) # no leap year in 2017~2018
+                if self.type == "訂貨":
+                    self.transformed_table.append(["0/0" for i in range(365+2)]) # no leap year in 2017~2018
+                else:
+                    self.transformed_table.append([0 for i in range(365+2)]) # no leap year in 2017~2018
                 self.transformed_table[-1][0] = shop_code
                 self.transformed_table[-1][1] = product_code
                 prev_shop_code = shop_code
@@ -57,10 +71,11 @@ class transoformer():
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='transform tables')
-    parser.add_argument("--input", "-i", required=True, help='input file')
+    parser = argparse.ArgumentParser(description="Data process helper")
+    parser.add_argument("--input", "-i", required=True, help="input file name")
+    parser.add_argument("--transform", "-t", action="store_true", help="transform input file to _transform.csv")
+    parser.add_argument("--correlation", "-c", action="store_true", help="observe correlation between products")
 
     args = parser.parse_args()
-    tf = transoformer(args.input)
-    tf.transform()
-    tf.write()
+    hp = helper(args)
+    hp.run()

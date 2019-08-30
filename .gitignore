@@ -3,5 +3,6 @@ data
 __pycahce__
 .DS_Store
 src/test.ipynb
+src/sim_matrix*
 *.ipynb_checkpoints
 *.vscode

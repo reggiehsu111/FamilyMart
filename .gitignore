@@ -5,4 +5,3 @@ __pycahce__
 src/sim_matrix*
 *.ipynb_checkpoints
 *.vscode
-src/MH/fm-prediction/saved

@@ -5,3 +5,6 @@ __pycahce__
 src/sim_matrix*
 *.ipynb_checkpoints
 *.vscode
+*__pycahce__
+*saved/models
+*saved/vis

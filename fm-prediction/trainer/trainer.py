@@ -41,31 +41,36 @@ class Trainer(BaseTrainer):
     def _train_epoch(self, epoch):
         self._model.train()
 
-        total_loss = 0
-        total_metrics = torch.zeros(len(self._metrics))
-        for batch_idx, (data, target) in enumerate(self._data_loader):
-            data, target = data.to(self._device), target.to(self._device)
-
+        total_loss_1 = 0
+        total_loss_2 = 0
+        total_metrics_1 = torch.zeros(len(self._metrics))
+        total_metrics_2 = torch.zeros(len(self._metrics))
+        for batch_idx, (data, target1, target2) in enumerate(self._data_loader):
+            data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
             self._optimizer.zero_grad()
             
-            output = self._model(data)
+            output1 = self._model(data)
+            loss1 = self._loss(output1, target1)
+            loss1.backward()
+            temp_data = torch.cat((data[:,:759,1:], output1.unsqueeze(-1)), 2)
+            temp_data = torch.cat((temp_data, data[:,759:, :]), 1)
+            output2 = self._model(temp_data)
 
-            loss = self._loss(output, target)
-            loss.backward()
+            loss2 = self._loss(output2, target2)
 
             self._optimizer.step()
 
-            total_loss += loss.item()
-            total_metrics += self._eval_metrics(output, target)
+            total_loss_1 += loss1.item()
+            total_loss_2 += loss2.item()
+            total_metrics_1 += self._eval_metrics(output1, target1)
+            total_metrics_2 += self._eval_metrics(output2, target2)
 
             # self._writer.set_step((epoch - 1) * self._len_epoch + batch_idx)
             # self._writer.add_scalar('loss', loss.item())
 
             if batch_idx % self._log_step == 0:
-                self._logger.debug('{} Loss: {:.6f}'.format(
-                    self._progress(batch_idx),
-                    loss.item() / len(data))
-                )
+                self._logger.debug('{} Loss1: {:.6f}'.format(self._progress(batch_idx),loss1.item() 
+                    / len(data)))
                 # self._writer.add_image('input', make_grid(data.cpu(), nrow=8,
                 #                        normalize=True))
 
@@ -73,8 +78,11 @@ class Trainer(BaseTrainer):
                 break
 
         log = {
-            'loss': total_loss / len(self._data_loader.dataset),
-            'metrics': (total_metrics / len(self._data_loader.dataset)).tolist()
+            'loss1': total_loss_1 / len(self._data_loader.dataset),
+            'loss2': total_loss_2 / len(self._data_loader.dataset),
+            'err1' : (total_metrics_1 / len(self._data_loader.dataset)).item(),
+            'err2' : (total_metrics_2 / len(self._data_loader.dataset)).item(),
+            'metrics': (total_metrics_1 / len(self._data_loader.dataset)).tolist()
         }
 
         if self._do_validation:
@@ -95,18 +103,26 @@ class Trainer(BaseTrainer):
         """
         self._model.eval()
 
-        total_val_loss = 0
-        total_val_metrics = torch.zeros(len(self._metrics))
+        total_val_loss_1 = 0
+        total_val_loss_2 = 0
+        total_val_metrics_1 = torch.zeros(len(self._metrics))
+        total_val_metrics_2 = torch.zeros(len(self._metrics))
         with torch.no_grad():
-            for batch_idx, (data, target) in enumerate(self._valid_data_loader):
-                data, target = data.to(self._device), target.to(self._device)
+            for batch_idx, (data, target1, target2) in enumerate(self._valid_data_loader):
+                data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
+            
+                output1 = self._model(data)
+                loss1 = self._loss(output1, target1)
+                temp_data = torch.cat((data[:,:759,1:], output1.unsqueeze(-1)), 2)
+                temp_data = torch.cat((temp_data, data[:,759:, :]), 1)
+                output2 = self._model(temp_data)
 
-                output = self._model(data)
-
-                loss = self._loss(output, target)
+                loss2 = self._loss(output2, target2)
                 
-                total_val_loss += loss.item()
-                total_val_metrics += self._eval_metrics(output, target)
+                total_val_loss_1 += loss1.item()
+                total_val_loss_2 += loss2.item()
+                total_val_metrics_1 += self._eval_metrics(output1, target1)
+                total_val_metrics_2  += self._eval_metrics(output2, target2)
 
                 # self._writer.set_step(
                 #     (epoch - 1) * len(self._valid_data_loader) + batch_idx,
@@ -121,8 +137,11 @@ class Trainer(BaseTrainer):
             # self._writer.add_histogram(name, p, bins='auto')
 
         return {
-            'val_loss': total_val_loss / len(self._valid_data_loader.dataset),
-            'val_metrics': (total_val_metrics / len(self._valid_data_loader.dataset)).tolist()
+            'val_loss_1': total_val_loss_1 / len(self._valid_data_loader.dataset),
+            'val_loss_2': total_val_loss_2 / len(self._valid_data_loader.dataset),
+            'val_err_1': (total_val_metrics_1 / len(self._valid_data_loader.dataset)).item(),
+            'val_err_2' : (total_val_metrics_2 / len(self._valid_data_loader.dataset)).item(),
+            'val_metrics': (total_val_metrics_1 / len(self._valid_data_loader.dataset)).tolist()
         }
 
     def _eval_metrics(self, output, target):

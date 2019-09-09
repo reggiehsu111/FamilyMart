@@ -33,7 +33,7 @@ def get_formatted_time(idx):
 
 def main(config):
     logger = config.get_logger('test')
-
+    print(config['data_loader']['args']['data_dir'])
     # setup data_loader instances
     data_loader = getattr(module_data, config['data_loader']['type'])(
         config['data_loader']['args']['data_dir'],
@@ -77,7 +77,7 @@ def main(config):
     hist_pred = []
     hist_real = []
     with torch.no_grad():
-        for i, (data, target) in enumerate(tqdm(data_loader)):
+        for i, (data, target, _) in enumerate(tqdm(data_loader)):
             data, target = data.to(device), target.to(device)
             output = model(data)
 

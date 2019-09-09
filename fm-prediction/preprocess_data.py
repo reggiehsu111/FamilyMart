@@ -42,7 +42,7 @@ def get_valid_commodity_codes(commodity_dataframe, sales_data):
     return set(commodity_codes).intersection(expiration_st_6['商品代號'].unique())
 
 if __name__ == '__main__':
-    data_dir = Path('data/family_mart')
+    data_dir = Path('../data')
 
     commodity_dataframe = pd.read_csv(
         data_dir / '商品主檔.txt', sep='\t')
@@ -90,12 +90,12 @@ if __name__ == '__main__':
                     processed_sales_data.append(0)
     
     processed_sales_data = torch.tensor(processed_sales_data, dtype=torch.float)
-
-    sales_mean = processed_sales_data.mean()
-    sales_std = processed_sales_data.std()
+    processed_sales_data = processed_sales_data.view(730, 5, -1)
+    sales_mean = torch.mean(processed_sales_data)
+    sales_std = torch.std(processed_sales_data)
 
     processed_sales_data = (processed_sales_data - sales_mean) / sales_std
-
+    print(processed_sales_data.shape)
     with open(data_dir / 'sales_data.pkl', 'wb') as file:
         pickle.dump(processed_sales_data, file)
     with open(data_dir / 'sales_mean.pkl', 'wb') as file:

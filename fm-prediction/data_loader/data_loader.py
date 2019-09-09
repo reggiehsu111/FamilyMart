@@ -38,7 +38,7 @@ class FamilyMartDataset(Dataset):
         x_index = idx * len(self._commodity_codes)
 
         x_indices = x_index + torch.tensor(
-            [range(i, self._time_window_size * interval, interval)
+            [range(i, i + self._time_window_size * interval, interval)
              for i in range(len(self._commodity_codes))])
 
         store_code_onehot = torch.zeros(len(self._store_codes), self._time_window_size)
@@ -46,7 +46,7 @@ class FamilyMartDataset(Dataset):
 
         x = torch.cat([self._sales_data[x_indices], store_code_onehot], 0)
 
-        y_index = (idx + self._time_window_size) * len(self._commodity_codes)
+        y_index = (idx + self._time_window_size * len(self._store_codes)) * len(self._commodity_codes)
 
         y_indices = y_index + torch.tensor(
             [i for i in range(len(self._commodity_codes))])

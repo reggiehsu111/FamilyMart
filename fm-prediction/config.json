@@ -10,7 +10,7 @@
         "type": "FamilyMartDataLoader",
         "args":{
             "data_dir": "../data",
-            "batch_size": 32,
+            "batch_size": 128,
             "shuffle": true,
             "validation_split_ratio": 0.1,
             "num_workers": 8

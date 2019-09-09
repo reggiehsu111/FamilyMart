@@ -77,11 +77,17 @@ def main(config):
     hist_pred = []
     hist_real = []
     with torch.no_grad():
-        for i, (data, target, _) in enumerate(tqdm(data_loader)):
+        for i, (data, target, target_2) in enumerate(tqdm(data_loader)):
             data, target = data.to(device), target.to(device)
             output = model(data)
 
-            hist_pred.append(torch.round(output * std + mean))
+            output_1 = torch.round(output * std + mean)
+
+            output_1_pad = torch.cat([output_1, data[:, -5:, 0]], 1)
+
+            output_2 = model(torch.cat([data[:, :, 1:], output_1_pad.unsqueeze(2)], 2))
+
+            hist_pred.append(output_1)
             # hist_pred.append(output * std + mean)
             hist_real.append(target * std + mean)
 
@@ -89,7 +95,7 @@ def main(config):
             loss = loss_fn(output, target)
             total_loss += loss.item()
             for i, metric in enumerate(metric_fns):
-                total_metrics[i] += metric(output, target, mean, std)
+                total_metrics[i] += metric(output_2, target_2, mean, std)
 
     hist_pred = torch.cat(hist_pred, 0)
     hist_real = torch.cat(hist_real, 0)

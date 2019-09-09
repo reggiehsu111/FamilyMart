@@ -1,5 +1,5 @@
 .git
-data
+*data/
 __pycahce__
 .DS_Store
 src/sim_matrix*

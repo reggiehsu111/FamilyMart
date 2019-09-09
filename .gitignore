@@ -1,10 +1,9 @@
 .git
 *data/
-__pycahce__
+__pycache__
 .DS_Store
 src/sim_matrix*
 *.ipynb_checkpoints
 *.vscode
-*__pycahce__
-*saved/models
-*saved/vis
+*__pycache__
+*saved/

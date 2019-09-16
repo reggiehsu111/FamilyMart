@@ -1,14 +1,13 @@
 {
     "name": "FamilyMart-FCNet",
     "n_gpu": 0,
-
     "model": {
         "type": "FCModel",
         "args": {}
     },
     "data_loader": {
         "type": "FamilyMartDataLoader",
-        "args":{
+        "args": {
             "data_dir": "../data",
             "batch_size": 128,
             "shuffle": true,
@@ -18,7 +17,7 @@
     },
     "optimizer": {
         "type": "Adam",
-        "args":{
+        "args": {
             "lr": 0.001,
             "weight_decay": 0,
             "amsgrad": true
@@ -37,14 +36,11 @@
     },
     "trainer": {
         "epochs": 100,
-
         "save_dir": "saved/",
         "save_period": 1000,
         "verbosity": 2,
-        
         "monitor": "min val_err",
         "early_stop": 10,
-
         "tensorboard": true
     }
 }

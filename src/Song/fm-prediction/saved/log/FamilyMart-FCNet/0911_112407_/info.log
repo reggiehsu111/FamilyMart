@@ -1,0 +1,261 @@
+2019-09-11 11:24:07,899 - train - INFO - FCModel(
+  (sales_embedding_net): Sequential(
+    (0): Linear(in_features=240, out_features=256, bias=True)
+    (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Linear(in_features=256, out_features=16, bias=True)
+    (4): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+  )
+  (store_embedding_net): Sequential(
+    (0): Linear(in_features=5, out_features=1, bias=True)
+    (1): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+  )
+  (fc_net): ModuleList(
+    (0): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (1): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (2): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (3): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (4): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (5): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (6): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (7): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (8): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (9): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (10): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (11): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+  )
+)
+Trainable parameters: 73273
+2019-09-11 11:24:29,668 - trainer - INFO -     epoch          : 1
+2019-09-11 11:24:29,669 - trainer - INFO -     loss1          : 9.686483538192912
+2019-09-11 11:24:29,669 - trainer - INFO -     loss2          : 9.774401697309335
+2019-09-11 11:24:29,669 - trainer - INFO -     err1           : 0.6168230772018433
+2019-09-11 11:24:29,670 - trainer - INFO -     err2           : 0.6198265552520752
+2019-09-11 11:24:29,670 - trainer - INFO -     err            : 0.6168230772018433
+2019-09-11 11:24:29,670 - trainer - INFO -     val_loss_1     : 2.1332281806864923
+2019-09-11 11:24:29,670 - trainer - INFO -     val_loss_2     : 2.132895371939184
+2019-09-11 11:24:29,671 - trainer - INFO -     val_err_1      : 0.27895689010620117
+2019-09-11 11:24:29,671 - trainer - INFO -     val_err_2      : 0.27336299419403076
+2019-09-11 11:24:29,671 - trainer - INFO -     val_err        : 0.27895689010620117
+2019-09-11 11:24:29,688 - trainer - INFO - Saving current best to saved\models\FamilyMart-FCNet\0911_112407\model_best.pth ...
+2019-09-11 11:24:49,337 - trainer - INFO -     epoch          : 2
+2019-09-11 11:24:49,337 - trainer - INFO -     loss1          : 8.565100500243853
+2019-09-11 11:24:49,338 - trainer - INFO -     loss2          : 8.609720530395748
+2019-09-11 11:24:49,338 - trainer - INFO -     err1           : 0.5881825685501099
+2019-09-11 11:24:49,338 - trainer - INFO -     err2           : 0.5887327194213867
+2019-09-11 11:24:49,338 - trainer - INFO -     err            : 0.5881825685501099
+2019-09-11 11:24:49,339 - trainer - INFO -     val_loss_1     : 1.8139772314064915
+2019-09-11 11:24:49,339 - trainer - INFO -     val_loss_2     : 1.7905850764298186
+2019-09-11 11:24:49,339 - trainer - INFO -     val_err_1      : 0.25378453731536865
+2019-09-11 11:24:49,339 - trainer - INFO -     val_err_2      : 0.24735336005687714
+2019-09-11 11:24:49,340 - trainer - INFO -     val_err        : 0.25378453731536865
+2019-09-11 11:24:49,563 - trainer - INFO - Saving current best to saved\models\FamilyMart-FCNet\0911_112407\model_best.pth ...
+2019-09-11 11:25:10,095 - trainer - INFO -     epoch          : 3
+2019-09-11 11:25:10,096 - trainer - INFO -     loss1          : 8.163705538991952
+2019-09-11 11:25:10,096 - trainer - INFO -     loss2          : 8.216510894020539
+2019-09-11 11:25:10,096 - trainer - INFO -     err1           : 0.5731139779090881
+2019-09-11 11:25:10,097 - trainer - INFO -     err2           : 0.57423335313797
+2019-09-11 11:25:10,097 - trainer - INFO -     err            : 0.5731139779090881
+2019-09-11 11:25:10,097 - trainer - INFO -     val_loss_1     : 1.896765435963553
+2019-09-11 11:25:10,097 - trainer - INFO -     val_loss_2     : 1.8680646242606767
+2019-09-11 11:25:10,098 - trainer - INFO -     val_err_1      : 0.2712581753730774
+2019-09-11 11:25:10,098 - trainer - INFO -     val_err_2      : 0.2676137685775757
+2019-09-11 11:25:10,098 - trainer - INFO -     val_err        : 0.2712581753730774
+2019-09-11 11:25:30,303 - trainer - INFO -     epoch          : 4
+2019-09-11 11:25:30,304 - trainer - INFO -     loss1          : 7.851556604967241
+2019-09-11 11:25:30,304 - trainer - INFO -     loss2          : 7.899295562756122
+2019-09-11 11:25:30,304 - trainer - INFO -     err1           : 0.567943811416626
+2019-09-11 11:25:30,305 - trainer - INFO -     err2           : 0.5687332153320312
+2019-09-11 11:25:30,305 - trainer - INFO -     err            : 0.567943811416626
+2019-09-11 11:25:30,306 - trainer - INFO -     val_loss_1     : 1.9077985109794267
+2019-09-11 11:25:30,306 - trainer - INFO -     val_loss_2     : 1.8902871903598097
+2019-09-11 11:25:30,306 - trainer - INFO -     val_err_1      : 0.2641026973724365
+2019-09-11 11:25:30,307 - trainer - INFO -     val_err_2      : 0.260177344083786
+2019-09-11 11:25:30,307 - trainer - INFO -     val_err        : 0.2641026973724365
+2019-09-11 11:25:52,723 - trainer - INFO -     epoch          : 5
+2019-09-11 11:25:52,733 - trainer - INFO -     loss1          : 7.50615158650189
+2019-09-11 11:25:52,734 - trainer - INFO -     loss2          : 7.541997555334707
+2019-09-11 11:25:52,735 - trainer - INFO -     err1           : 0.5542625784873962
+2019-09-11 11:25:52,735 - trainer - INFO -     err2           : 0.5554028153419495
+2019-09-11 11:25:52,735 - trainer - INFO -     err            : 0.5542625784873962
+2019-09-11 11:25:52,736 - trainer - INFO -     val_loss_1     : 2.2083581176326468
+2019-09-11 11:25:52,736 - trainer - INFO -     val_loss_2     : 2.2205805559461615
+2019-09-11 11:25:52,737 - trainer - INFO -     val_err_1      : 0.2848889231681824
+2019-09-11 11:25:52,737 - trainer - INFO -     val_err_2      : 0.28271833062171936
+2019-09-11 11:25:52,737 - trainer - INFO -     val_err        : 0.2848889231681824
+2019-09-11 11:26:20,423 - trainer - INFO -     epoch          : 6
+2019-09-11 11:26:20,425 - trainer - INFO -     loss1          : 7.134930182682751
+2019-09-11 11:26:20,425 - trainer - INFO -     loss2          : 7.194969773339345
+2019-09-11 11:26:20,425 - trainer - INFO -     err1           : 0.5404202342033386
+2019-09-11 11:26:20,425 - trainer - INFO -     err2           : 0.5418662428855896
+2019-09-11 11:26:20,425 - trainer - INFO -     err            : 0.5404202342033386
+2019-09-11 11:26:20,426 - trainer - INFO -     val_loss_1     : 2.039816003806178
+2019-09-11 11:26:20,426 - trainer - INFO -     val_loss_2     : 2.0682842672503035
+2019-09-11 11:26:20,427 - trainer - INFO -     val_err_1      : 0.2637355625629425
+2019-09-11 11:26:20,427 - trainer - INFO -     val_err_2      : 0.2632331848144531
+2019-09-11 11:26:20,427 - trainer - INFO -     val_err        : 0.2637355625629425
+2019-09-11 11:26:41,652 - trainer - INFO -     epoch          : 7
+2019-09-11 11:26:41,652 - trainer - INFO -     loss1          : 6.705013087931267
+2019-09-11 11:26:41,653 - trainer - INFO -     loss2          : 6.753370688670188
+2019-09-11 11:26:41,653 - trainer - INFO -     err1           : 0.5256686806678772
+2019-09-11 11:26:41,654 - trainer - INFO -     err2           : 0.5271883606910706
+2019-09-11 11:26:41,654 - trainer - INFO -     err            : 0.5256686806678772
+2019-09-11 11:26:41,654 - trainer - INFO -     val_loss_1     : 2.1109978503978715
+2019-09-11 11:26:41,655 - trainer - INFO -     val_loss_2     : 2.0618072482806635
+2019-09-11 11:26:41,655 - trainer - INFO -     val_err_1      : 0.29520168900489807
+2019-09-11 11:26:41,655 - trainer - INFO -     val_err_2      : 0.28743213415145874
+2019-09-11 11:26:41,656 - trainer - INFO -     val_err        : 0.29520168900489807
+2019-09-11 11:27:04,065 - trainer - INFO -     epoch          : 8
+2019-09-11 11:27:04,065 - trainer - INFO -     loss1          : 6.160523131916839
+2019-09-11 11:27:04,066 - trainer - INFO -     loss2          : 6.2257374350492
+2019-09-11 11:27:04,066 - trainer - INFO -     err1           : 0.49807578325271606
+2019-09-11 11:27:04,067 - trainer - INFO -     err2           : 0.49995318055152893
+2019-09-11 11:27:04,067 - trainer - INFO -     err            : 0.49807578325271606
+2019-09-11 11:27:04,068 - trainer - INFO -     val_loss_1     : 2.367541013252609
+2019-09-11 11:27:04,068 - trainer - INFO -     val_loss_2     : 2.3368717638426872
+2019-09-11 11:27:04,069 - trainer - INFO -     val_err_1      : 0.3011813461780548
+2019-09-11 11:27:04,069 - trainer - INFO -     val_err_2      : 0.2959176301956177
+2019-09-11 11:27:04,069 - trainer - INFO -     val_err        : 0.3011813461780548
+2019-09-11 11:27:27,158 - trainer - INFO -     epoch          : 9
+2019-09-11 11:27:27,159 - trainer - INFO -     loss1          : 5.577338324652778
+2019-09-11 11:27:27,159 - trainer - INFO -     loss2          : 5.628470472883233
+2019-09-11 11:27:27,160 - trainer - INFO -     err1           : 0.47347772121429443
+2019-09-11 11:27:27,160 - trainer - INFO -     err2           : 0.4746193289756775
+2019-09-11 11:27:27,161 - trainer - INFO -     err            : 0.47347772121429443
+2019-09-11 11:27:27,161 - trainer - INFO -     val_loss_1     : 2.076360453143979
+2019-09-11 11:27:27,162 - trainer - INFO -     val_loss_2     : 1.9643294937619051
+2019-09-11 11:27:27,162 - trainer - INFO -     val_err_1      : 0.2848997414112091
+2019-09-11 11:27:27,162 - trainer - INFO -     val_err_2      : 0.2742638885974884
+2019-09-11 11:27:27,163 - trainer - INFO -     val_err        : 0.2848997414112091
+2019-09-11 11:27:46,675 - trainer - INFO -     epoch          : 10
+2019-09-11 11:27:46,675 - trainer - INFO -     loss1          : 5.0441622065711496
+2019-09-11 11:27:46,676 - trainer - INFO -     loss2          : 5.125077546040685
+2019-09-11 11:27:46,676 - trainer - INFO -     err1           : 0.4497387707233429
+2019-09-11 11:27:46,677 - trainer - INFO -     err2           : 0.45259079337120056
+2019-09-11 11:27:46,677 - trainer - INFO -     err            : 0.4497387707233429
+2019-09-11 11:27:46,677 - trainer - INFO -     val_loss_1     : 2.2946920495993677
+2019-09-11 11:27:46,678 - trainer - INFO -     val_loss_2     : 2.224922746314598
+2019-09-11 11:27:46,678 - trainer - INFO -     val_err_1      : 0.2938152551651001
+2019-09-11 11:27:46,679 - trainer - INFO -     val_err_2      : 0.28656378388404846
+2019-09-11 11:27:46,679 - trainer - INFO -     val_err        : 0.2938152551651001
+2019-09-11 11:28:08,206 - trainer - INFO -     epoch          : 11
+2019-09-11 11:28:08,207 - trainer - INFO -     loss1          : 4.349275395034293
+2019-09-11 11:28:08,207 - trainer - INFO -     loss2          : 4.42803448249089
+2019-09-11 11:28:08,208 - trainer - INFO -     err1           : 0.4163352847099304
+2019-09-11 11:28:08,208 - trainer - INFO -     err2           : 0.4196586012840271
+2019-09-11 11:28:08,209 - trainer - INFO -     err            : 0.4163352847099304
+2019-09-11 11:28:08,209 - trainer - INFO -     val_loss_1     : 2.6363234233519215
+2019-09-11 11:28:08,209 - trainer - INFO -     val_loss_2     : 2.5762093479978745
+2019-09-11 11:28:08,210 - trainer - INFO -     val_err_1      : 0.3109411895275116
+2019-09-11 11:28:08,210 - trainer - INFO -     val_err_2      : 0.304118275642395
+2019-09-11 11:28:08,210 - trainer - INFO -     val_err        : 0.3109411895275116
+2019-09-11 11:28:29,364 - trainer - INFO -     epoch          : 12
+2019-09-11 11:28:29,364 - trainer - INFO -     loss1          : 3.8628394939780564
+2019-09-11 11:28:29,365 - trainer - INFO -     loss2          : 3.9688016534272856
+2019-09-11 11:28:29,366 - trainer - INFO -     err1           : 0.3871786892414093
+2019-09-11 11:28:29,366 - trainer - INFO -     err2           : 0.3914325535297394
+2019-09-11 11:28:29,366 - trainer - INFO -     err            : 0.3871786892414093
+2019-09-11 11:28:29,367 - trainer - INFO -     val_loss_1     : 2.8410774743177867
+2019-09-11 11:28:29,367 - trainer - INFO -     val_loss_2     : 2.840840437386988
+2019-09-11 11:28:29,368 - trainer - INFO -     val_err_1      : 0.30755555629730225
+2019-09-11 11:28:29,368 - trainer - INFO -     val_err_2      : 0.3048044443130493
+2019-09-11 11:28:29,369 - trainer - INFO -     val_err        : 0.30755555629730225
+2019-09-11 11:28:29,369 - trainer - INFO - Validation performance didn't improve for 10 epochs. Training stops.

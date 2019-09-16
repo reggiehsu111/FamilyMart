@@ -1,6 +1,7 @@
 import pickle
 import torch
 import pandas as pd
+import numpy as np
 from pathlib import Path
 from torch.utils.data import Dataset
 
@@ -13,9 +14,13 @@ class FamilyMartDataset(Dataset):
         # day. i.e., the target day is not included in window size.
         self._time_window_size = 20
 
-        with open(data_dir / 'sales_data.pkl', 'rb') as file:
+        # with open(data_dir / 'sales_data.pkl', 'rb') as file:
+        #     self._sales_data = pickle.load(file)
+        with open(data_dir / 'sales_data_pinfan.pkl', 'rb') as file:
             self._sales_data = pickle.load(file)
-            
+        # with open(data_dir / 'sales_data_qunfan.pkl', 'rb') as file:
+        #     self._sales_data = pickle.load(file)
+
         with open(data_dir / 'commodity_codes.pkl', 'rb') as file:
             self._commodity_codes = pickle.load(file)
         with open(data_dir / 'store_codes.pkl', 'rb') as file:

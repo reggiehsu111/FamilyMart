@@ -1,0 +1,486 @@
+2019-09-16 09:39:44,680 - train - INFO - FCModel(
+  (sales_embedding_net): Sequential(
+    (0): Linear(in_features=740, out_features=256, bias=True)
+    (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+    (3): Linear(in_features=256, out_features=16, bias=True)
+    (4): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU()
+  )
+  (store_embedding_net): Sequential(
+    (0): Linear(in_features=5, out_features=1, bias=True)
+    (1): BatchNorm1d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU()
+  )
+  (fc_net): ModuleList(
+    (0): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (1): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (2): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (3): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (4): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (5): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (6): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (7): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (8): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (9): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (10): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (11): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (12): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (13): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (14): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (15): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (16): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (17): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (18): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (19): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (20): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (21): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (22): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (23): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (24): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (25): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (26): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (27): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (28): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (29): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (30): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (31): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (32): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (33): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (34): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (35): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+    (36): Sequential(
+      (0): Linear(in_features=37, out_features=64, bias=True)
+      (1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Linear(in_features=64, out_features=64, bias=True)
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (5): ReLU()
+      (6): Linear(in_features=64, out_features=1, bias=True)
+    )
+  )
+)
+Trainable parameters: 201273
+2019-09-16 09:40:06,882 - trainer - INFO -     epoch          : 1
+2019-09-16 09:40:06,883 - trainer - INFO -     loss1          : 30.909585054874608
+2019-09-16 09:40:06,883 - trainer - INFO -     loss2          : 31.6968939983007
+2019-09-16 09:40:06,883 - trainer - INFO -     err1           : 0.8578450679779053
+2019-09-16 09:40:06,883 - trainer - INFO -     err2           : 0.866523027420044
+2019-09-16 09:40:06,884 - trainer - INFO -     err            : 0.8578450679779053
+2019-09-16 09:40:06,884 - trainer - INFO -     val_loss_1     : 6.678828263030035
+2019-09-16 09:40:06,884 - trainer - INFO -     val_loss_2     : 7.092348132453622
+2019-09-16 09:40:06,884 - trainer - INFO -     val_err_1      : 0.363541841506958
+2019-09-16 09:40:06,885 - trainer - INFO -     val_err_2      : 0.3688240647315979
+2019-09-16 09:40:06,885 - trainer - INFO -     val_err        : 0.363541841506958
+2019-09-16 09:40:06,906 - trainer - INFO - Saving current best to saved\models\FamilyMart-FCNet\0916_093944\model_best.pth ...
+2019-09-16 09:40:28,042 - trainer - INFO -     epoch          : 2
+2019-09-16 09:40:28,043 - trainer - INFO -     loss1          : 26.737461984227767
+2019-09-16 09:40:28,043 - trainer - INFO -     loss2          : 27.031020716774638
+2019-09-16 09:40:28,043 - trainer - INFO -     err1           : 0.8192139267921448
+2019-09-16 09:40:28,044 - trainer - INFO -     err2           : 0.8235977292060852
+2019-09-16 09:40:28,044 - trainer - INFO -     err            : 0.8192139267921448
+2019-09-16 09:40:28,045 - trainer - INFO -     val_loss_1     : 5.966461370353564
+2019-09-16 09:40:28,045 - trainer - INFO -     val_loss_2     : 6.251588127217108
+2019-09-16 09:40:28,045 - trainer - INFO -     val_err_1      : 0.3507859706878662
+2019-09-16 09:40:28,046 - trainer - INFO -     val_err_2      : 0.3602297604084015
+2019-09-16 09:40:28,046 - trainer - INFO -     val_err        : 0.3507859706878662
+2019-09-16 09:40:28,068 - trainer - INFO - Saving current best to saved\models\FamilyMart-FCNet\0916_093944\model_best.pth ...
+2019-09-16 09:40:48,314 - trainer - INFO -     epoch          : 3
+2019-09-16 09:40:48,315 - trainer - INFO -     loss1          : 24.389172713149048
+2019-09-16 09:40:48,315 - trainer - INFO -     loss2          : 24.69033824260159
+2019-09-16 09:40:48,315 - trainer - INFO -     err1           : 0.7724175453186035
+2019-09-16 09:40:48,315 - trainer - INFO -     err2           : 0.7768186926841736
+2019-09-16 09:40:48,316 - trainer - INFO -     err            : 0.7724175453186035
+2019-09-16 09:40:48,316 - trainer - INFO -     val_loss_1     : 6.045153129227169
+2019-09-16 09:40:48,316 - trainer - INFO -     val_loss_2     : 6.414490716617436
+2019-09-16 09:40:48,317 - trainer - INFO -     val_err_1      : 0.3789828419685364
+2019-09-16 09:40:48,317 - trainer - INFO -     val_err_2      : 0.391755074262619
+2019-09-16 09:40:48,317 - trainer - INFO -     val_err        : 0.3789828419685364
+2019-09-16 09:41:08,667 - trainer - INFO -     epoch          : 4
+2019-09-16 09:41:08,668 - trainer - INFO -     loss1          : 22.16179056396005
+2019-09-16 09:41:08,668 - trainer - INFO -     loss2          : 22.434607887342953
+2019-09-16 09:41:08,669 - trainer - INFO -     err1           : 0.7340079545974731
+2019-09-16 09:41:08,669 - trainer - INFO -     err2           : 0.7376446723937988
+2019-09-16 09:41:08,669 - trainer - INFO -     err            : 0.7340079545974731
+2019-09-16 09:41:08,670 - trainer - INFO -     val_loss_1     : 6.408158696582376
+2019-09-16 09:41:08,670 - trainer - INFO -     val_loss_2     : 6.813495379875911
+2019-09-16 09:41:08,670 - trainer - INFO -     val_err_1      : 0.4037538170814514
+2019-09-16 09:41:08,670 - trainer - INFO -     val_err_2      : 0.40970125794410706
+2019-09-16 09:41:08,671 - trainer - INFO -     val_err        : 0.4037538170814514
+2019-09-16 09:41:28,478 - trainer - INFO -     epoch          : 5
+2019-09-16 09:41:28,479 - trainer - INFO -     loss1          : 20.53674762128239
+2019-09-16 09:41:28,479 - trainer - INFO -     loss2          : 20.81000136879785
+2019-09-16 09:41:28,479 - trainer - INFO -     err1           : 0.7005848288536072
+2019-09-16 09:41:28,479 - trainer - INFO -     err2           : 0.7044839859008789
+2019-09-16 09:41:28,480 - trainer - INFO -     err            : 0.7005848288536072
+2019-09-16 09:41:28,480 - trainer - INFO -     val_loss_1     : 7.190544263212925
+2019-09-16 09:41:28,480 - trainer - INFO -     val_loss_2     : 7.929671809867077
+2019-09-16 09:41:28,480 - trainer - INFO -     val_err_1      : 0.41535383462905884
+2019-09-16 09:41:28,481 - trainer - INFO -     val_err_2      : 0.4234224557876587
+2019-09-16 09:41:28,481 - trainer - INFO -     val_err        : 0.41535383462905884
+2019-09-16 09:41:48,557 - trainer - INFO -     epoch          : 6
+2019-09-16 09:41:48,557 - trainer - INFO -     loss1          : 18.683972517836548
+2019-09-16 09:41:48,558 - trainer - INFO -     loss2          : 18.913375177521964
+2019-09-16 09:41:48,558 - trainer - INFO -     err1           : 0.6665764451026917
+2019-09-16 09:41:48,558 - trainer - INFO -     err2           : 0.6708847880363464
+2019-09-16 09:41:48,559 - trainer - INFO -     err            : 0.6665764451026917
+2019-09-16 09:41:48,559 - trainer - INFO -     val_loss_1     : 7.149213703276833
+2019-09-16 09:41:48,559 - trainer - INFO -     val_loss_2     : 7.754469477245749
+2019-09-16 09:41:48,560 - trainer - INFO -     val_err_1      : 0.42766544222831726
+2019-09-16 09:41:48,560 - trainer - INFO -     val_err_2      : 0.4398380517959595
+2019-09-16 09:41:48,560 - trainer - INFO -     val_err        : 0.42766544222831726
+2019-09-16 09:42:11,258 - trainer - INFO -     epoch          : 7
+2019-09-16 09:42:11,259 - trainer - INFO -     loss1          : 17.201737127165536
+2019-09-16 09:42:11,260 - trainer - INFO -     loss2          : 17.402209697913598
+2019-09-16 09:42:11,260 - trainer - INFO -     err1           : 0.6371726989746094
+2019-09-16 09:42:11,261 - trainer - INFO -     err2           : 0.640610933303833
+2019-09-16 09:42:11,261 - trainer - INFO -     err            : 0.6371726989746094
+2019-09-16 09:42:11,261 - trainer - INFO -     val_loss_1     : 9.299982185498564
+2019-09-16 09:42:11,262 - trainer - INFO -     val_loss_2     : 10.817838527288538
+2019-09-16 09:42:11,262 - trainer - INFO -     val_err_1      : 0.47353726625442505
+2019-09-16 09:42:11,263 - trainer - INFO -     val_err_2      : 0.4968591034412384
+2019-09-16 09:42:11,263 - trainer - INFO -     val_err        : 0.47353726625442505
+2019-09-16 09:42:33,870 - trainer - INFO -     epoch          : 8
+2019-09-16 09:42:33,870 - trainer - INFO -     loss1          : 15.838314012962554
+2019-09-16 09:42:33,871 - trainer - INFO -     loss2          : 16.093174539363098
+2019-09-16 09:42:33,871 - trainer - INFO -     err1           : 0.6098452806472778
+2019-09-16 09:42:33,871 - trainer - INFO -     err2           : 0.6136225461959839
+2019-09-16 09:42:33,872 - trainer - INFO -     err            : 0.6098452806472778
+2019-09-16 09:42:33,872 - trainer - INFO -     val_loss_1     : 9.062834614999725
+2019-09-16 09:42:33,873 - trainer - INFO -     val_loss_2     : 10.489637826441033
+2019-09-16 09:42:33,873 - trainer - INFO -     val_err_1      : 0.4674782454967499
+2019-09-16 09:42:33,873 - trainer - INFO -     val_err_2      : 0.49993211030960083
+2019-09-16 09:42:33,874 - trainer - INFO -     val_err        : 0.4674782454967499
+2019-09-16 09:42:56,253 - trainer - INFO -     epoch          : 9
+2019-09-16 09:42:56,254 - trainer - INFO -     loss1          : 14.496855455330413
+2019-09-16 09:42:56,255 - trainer - INFO -     loss2          : 14.812165852289459
+2019-09-16 09:42:56,255 - trainer - INFO -     err1           : 0.5768540501594543
+2019-09-16 09:42:56,255 - trainer - INFO -     err2           : 0.5823036432266235
+2019-09-16 09:42:56,256 - trainer - INFO -     err            : 0.5768540501594543
+2019-09-16 09:42:56,256 - trainer - INFO -     val_loss_1     : 9.16425002674332
+2019-09-16 09:42:56,256 - trainer - INFO -     val_loss_2     : 10.696260485969248
+2019-09-16 09:42:56,257 - trainer - INFO -     val_err_1      : 0.48056796193122864
+2019-09-16 09:42:56,257 - trainer - INFO -     val_err_2      : 0.5149152874946594
+2019-09-16 09:42:56,257 - trainer - INFO -     val_err        : 0.48056796193122864
+2019-09-16 09:43:17,604 - trainer - INFO -     epoch          : 10
+2019-09-16 09:43:17,605 - trainer - INFO -     loss1          : 13.037860248806806
+2019-09-16 09:43:17,606 - trainer - INFO -     loss2          : 13.31186304889944
+2019-09-16 09:43:17,607 - trainer - INFO -     err1           : 0.5440773963928223
+2019-09-16 09:43:17,607 - trainer - INFO -     err2           : 0.5491868853569031
+2019-09-16 09:43:17,607 - trainer - INFO -     err            : 0.5440773963928223
+2019-09-16 09:43:17,608 - trainer - INFO -     val_loss_1     : 10.701180609713173
+2019-09-16 09:43:17,608 - trainer - INFO -     val_loss_2     : 12.708077366697493
+2019-09-16 09:43:17,608 - trainer - INFO -     val_err_1      : 0.5035817623138428
+2019-09-16 09:43:17,609 - trainer - INFO -     val_err_2      : 0.53093421459198
+2019-09-16 09:43:17,609 - trainer - INFO -     val_err        : 0.5035817623138428
+2019-09-16 09:43:38,891 - trainer - INFO -     epoch          : 11
+2019-09-16 09:43:38,891 - trainer - INFO -     loss1          : 13.912180642591162
+2019-09-16 09:43:38,892 - trainer - INFO -     loss2          : 14.343434495929648
+2019-09-16 09:43:38,892 - trainer - INFO -     err1           : 0.5749347805976868
+2019-09-16 09:43:38,892 - trainer - INFO -     err2           : 0.5842812657356262
+2019-09-16 09:43:38,893 - trainer - INFO -     err            : 0.5749347805976868
+2019-09-16 09:43:38,893 - trainer - INFO -     val_loss_1     : 9.875095974008945
+2019-09-16 09:43:38,893 - trainer - INFO -     val_loss_2     : 11.684859959902274
+2019-09-16 09:43:38,894 - trainer - INFO -     val_err_1      : 0.46685072779655457
+2019-09-16 09:43:38,894 - trainer - INFO -     val_err_2      : 0.4914346933364868
+2019-09-16 09:43:38,894 - trainer - INFO -     val_err        : 0.46685072779655457
+2019-09-16 09:44:01,244 - trainer - INFO -     epoch          : 12
+2019-09-16 09:44:01,245 - trainer - INFO -     loss1          : 12.487958508938211
+2019-09-16 09:44:01,246 - trainer - INFO -     loss2          : 12.884740079858044
+2019-09-16 09:44:01,246 - trainer - INFO -     err1           : 0.5265937447547913
+2019-09-16 09:44:01,246 - trainer - INFO -     err2           : 0.5338822603225708
+2019-09-16 09:44:01,247 - trainer - INFO -     err            : 0.5265937447547913
+2019-09-16 09:44:01,247 - trainer - INFO -     val_loss_1     : 11.060486810367436
+2019-09-16 09:44:01,248 - trainer - INFO -     val_loss_2     : 13.337143537433745
+2019-09-16 09:44:01,248 - trainer - INFO -     val_err_1      : 0.486934095621109
+2019-09-16 09:44:01,248 - trainer - INFO -     val_err_2      : 0.5215767025947571
+2019-09-16 09:44:01,249 - trainer - INFO -     val_err        : 0.486934095621109
+2019-09-16 09:44:01,249 - trainer - INFO - Validation performance didn't improve for 10 epochs. Training stops.

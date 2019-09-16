@@ -31,12 +31,33 @@ class Trainer(BaseTrainer):
         self._lr_scheduler = lr_scheduler
         self._log_step = int(math.sqrt(self._len_epoch))
 
+        # with open(Path(config['data_loader']['args']['data_dir'])
+        #           / 'sales_mean.pkl', 'rb') as file:
+        #     self._mean = pickle.load(file)
+        # with open(Path(config['data_loader']['args']['data_dir'])
+        #           / 'sales_std.pkl', 'rb') as file:
+        #     self._std = pickle.load(file)
+
         with open(Path(config['data_loader']['args']['data_dir'])
-                  / 'sales_mean.pkl', 'rb') as file:
+                  / 'sales_mean_pinfan.pkl', 'rb') as file:
             self._mean = pickle.load(file)
         with open(Path(config['data_loader']['args']['data_dir'])
-                  / 'sales_std.pkl', 'rb') as file:
+                  / 'sales_std_pinfan.pkl', 'rb') as file:
             self._std = pickle.load(file)
+
+        with open(Path(config['data_loader']['args']['data_dir'])
+                  / 'sales_mean_qunfan.pkl', 'rb') as file:
+            self._mean = pickle.load(file)
+        with open(Path(config['data_loader']['args']['data_dir'])
+                  / 'sales_std_qunfan.pkl', 'rb') as file:
+            self._std = pickle.load(file)
+
+        #origin
+        # self._itemnum = 759
+        # pinfan
+        # self._itemnum = 12
+        # qunfan
+        self._itemnum = 37
 
     def _train_epoch(self, epoch):
         self._model.train()
@@ -52,9 +73,13 @@ class Trainer(BaseTrainer):
             output1 = self._model(data)
             loss1 = self._loss(output1, target1)
             loss1.backward()
-            temp_data = torch.cat((data[:,:759,1:], output1.unsqueeze(-1)), 2)
-            temp_data = torch.cat((temp_data, data[:,759:, :]), 1)
-            output2 = self._model(temp_data)
+
+            output1pad = torch.cat([output1, data[:, -5:, 0]], 1)
+            output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
+
+            # temp_data = torch.cat((data[:,:self._itemnum,1:], output1.unsqueeze(-1)), 2)
+            # temp_data = torch.cat((temp_data, data[:,self._itemnum:, :]), 1)
+            # output2 = self._model(temp_data)
 
             loss2 = self._loss(output2, target2)
 
@@ -113,9 +138,12 @@ class Trainer(BaseTrainer):
             
                 output1 = self._model(data)
                 loss1 = self._loss(output1, target1)
-                temp_data = torch.cat((data[:,:759,1:], output1.unsqueeze(-1)), 2)
-                temp_data = torch.cat((temp_data, data[:,759:, :]), 1)
-                output2 = self._model(temp_data)
+
+                output1pad = torch.cat([output1, data[:, -5:, 0]], 1)
+                output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
+                # temp_data = torch.cat((data[:,:self._itemnum,1:], output1.unsqueeze(-1)), 2)
+                # temp_data = torch.cat((temp_data, data[:,self._itemnum:, :]), 1)
+                # output2 = self._model(temp_data)
 
                 loss2 = self._loss(output2, target2)
                 

@@ -10,7 +10,11 @@ class FCModel(BaseModel):
     def __init__(self):
         super().__init__()
 
-        self._n_commodities = 759
+        # self._n_commodities = 759
+        # pinfan
+        self._n_commodities = 12
+        # qunfan
+        # self._n_commodities = 37
         self._n_stores = 5
 
         self.sales_embedding_net = nn.Sequential(

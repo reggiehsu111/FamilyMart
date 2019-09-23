@@ -27,11 +27,11 @@ class FCModel(BaseModel):
 
         self.all_net = nn.Sequential(
 
-            nn.Linear(STORE_DIM[1] + COMMIDITY_DIM[1] + PING_DIM[1] + CHING_DIM[1] + DAY_IN_YEAR_DIM[1] + DAY_IN_WEEK_DIM[1] + WINDOW_SIZE, 512),
-            nn.BatchNorm1d(512),
-            nn.ReLU(),
+            nn.Linear( STORE_DIM[1] + COMMIDITY_DIM[1] + PING_DIM[1] + CHING_DIM[1] + DAY_IN_YEAR_DIM[1] + DAY_IN_WEEK_DIM[1] + WINDOW_SIZE, 256),
+            # nn.BatchNorm1d(512),
+            # nn.ReLU(),
 
-            nn.Linear(512, 256),
+            # nn.Linear(512, 256),
             nn.BatchNorm1d(256),
             nn.ReLU(),
 

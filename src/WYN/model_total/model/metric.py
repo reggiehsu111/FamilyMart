@@ -13,6 +13,4 @@ def err(output, target, mean, std):
     target = target * std + mean
 
     err = torch.sum(torch.abs(output - target)) / torch.sum(target)
-    # print(torch.sum(torch.abs(output - target)))
-    print(output.size(0))
     return err * output.size(0)

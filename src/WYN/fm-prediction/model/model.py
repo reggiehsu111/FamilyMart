@@ -13,7 +13,7 @@ class FCModel(BaseModel):
         self._n_commodities = 759
         self._n_stores = 5
 
-        self.sales_embedding_net = nn.Sequential(
+        '''self.sales_embedding_net = nn.Sequential(
             nn.Linear(self._n_commodities * 20, 256),
             nn.BatchNorm1d(256),
             nn.ReLU(),
@@ -27,10 +27,11 @@ class FCModel(BaseModel):
             nn.Linear(self._n_stores, 1),
             nn.BatchNorm1d(1),
             nn.ReLU(),
-        )
+        )'''
 
         self.fc_net = nn.ModuleList([nn.Sequential(
-            nn.Linear(20 + 1 + 16, 64),
+            # nn.Linear(20 + 1 + 16, 64),
+            nn.Linear(20, 64),
             nn.BatchNorm1d(64),
             nn.ReLU(),
 
@@ -43,13 +44,20 @@ class FCModel(BaseModel):
 
     def forward(self, x):
         a = x
-        
-        b = self.store_embedding_net(x[:, -self._n_stores:, 0])
 
-        c = self.sales_embedding_net(x[:, :-self._n_stores].view(x.size(0), -1))
+        '''
+        a = batch_size * ( n_commodities + n_stores ) * 20 days
+        a[:, :-n_stores] save 20 days times series for n_commodities
+        a[:, -n_stores:] save stores' one-of-N encoding
+        '''
+
+        # b = self.store_embedding_net(x[:, -self._n_stores:, 0])
+
+        # c = self.sales_embedding_net(x[:, :-self._n_stores].view(x.size(0), -1))
         
         y = torch.cat([
-            self.fc_net[i](torch.cat([a[:, i], b, c], 1))
+            # self.fc_net[i](torch.cat([a[:, i]''', b, c'''], 1))
+            self.fc_net[i](torch.cat([a[:, i]], 1))
             for i in range(self._n_commodities)
         ], 1)
 

@@ -78,7 +78,6 @@ if __name__ == '__main__':
     for day_i in tqdm(range(2 * 365)):
         time = get_formatted_time(day_i)
         # print(time, end=' ', flush=True)
-
         for sc in store_codes:
             for cc in commodity_codes:
                 # print(cc)

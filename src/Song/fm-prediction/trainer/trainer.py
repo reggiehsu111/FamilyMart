@@ -45,19 +45,19 @@ class Trainer(BaseTrainer):
                   / 'sales_std_pinfan.pkl', 'rb') as file:
             self._std = pickle.load(file)
 
-        with open(Path(config['data_loader']['args']['data_dir'])
-                  / 'sales_mean_qunfan.pkl', 'rb') as file:
-            self._mean = pickle.load(file)
-        with open(Path(config['data_loader']['args']['data_dir'])
-                  / 'sales_std_qunfan.pkl', 'rb') as file:
-            self._std = pickle.load(file)
+        # with open(Path(config['data_loader']['args']['data_dir'])
+        #           / 'sales_mean_qunfan.pkl', 'rb') as file:
+        #     self._mean = pickle.load(file)
+        # with open(Path(config['data_loader']['args']['data_dir'])
+        #           / 'sales_std_qunfan.pkl', 'rb') as file:
+        #     self._std = pickle.load(file)
 
         #origin
         # self._itemnum = 759
         # pinfan
-        # self._itemnum = 12
+        self._itemnum = 12
         # qunfan
-        self._itemnum = 37
+        # self._itemnum = 37
 
     def _train_epoch(self, epoch):
         self._model.train()
@@ -66,16 +66,23 @@ class Trainer(BaseTrainer):
         total_loss_2 = 0
         total_metrics_1 = torch.zeros(len(self._metrics))
         total_metrics_2 = torch.zeros(len(self._metrics))
-        for batch_idx, (data, target1, target2) in enumerate(self._data_loader):
-            data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
+        # for batch_idx, (data, target1, target2) in enumerate(self._data_loader):
+            # data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
+        # holiday
+        for batch_idx, (data, target1, target2, d21_holiday) in enumerate(self._data_loader):
+            data, target1, target2, d21_holiday = data.to(self._device), target1.to(self._device), target2.to(self._device), d21_holiday.to(self._device)
             self._optimizer.zero_grad()
             
             output1 = self._model(data)
             loss1 = self._loss(output1, target1)
             loss1.backward()
-
             output1pad = torch.cat([output1, data[:, -5:, 0]], 1)
-            output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
+            d21_holidaypad = torch.cat([d21_holiday, data[:, -5:, 0]], 1)
+            # output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
+            # holiday
+            # output2 = self._model(torch.cat([data[:, :, 1:20], output1pad.unsqueeze(2), data[:, :, 21:], d21_holidaypad.unsqueeze(2)], 2))
+            # holiday one
+            output2 = self._model(torch.cat([data[:, :, 1:20], output1pad.unsqueeze(2), d21_holidaypad.unsqueeze(2)], 2))
 
             # temp_data = torch.cat((data[:,:self._itemnum,1:], output1.unsqueeze(-1)), 2)
             # temp_data = torch.cat((temp_data, data[:,self._itemnum:, :]), 1)
@@ -132,25 +139,41 @@ class Trainer(BaseTrainer):
         total_val_loss_2 = 0
         total_val_metrics_1 = torch.zeros(len(self._metrics))
         total_val_metrics_2 = torch.zeros(len(self._metrics))
+        total_val_output1 = []
+        total_val_output2 = []
+        total_val_target1 = []
+        total_val_target2 = []
         with torch.no_grad():
-            for batch_idx, (data, target1, target2) in enumerate(self._valid_data_loader):
-                data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
-            
+            # for batch_idx, (data, target1, target2) in enumerate(self._valid_data_loader):
+            #     data, target1, target2 = data.to(self._device), target1.to(self._device), target2.to(self._device)
+            # holiday
+            for batch_idx, (data, target1, target2, d21_holiday) in enumerate(self._valid_data_loader):
+                data, target1, target2, d21_holiday = data.to(self._device), target1.to(self._device), target2.to(self._device), d21_holiday.to(self._device)
+
                 output1 = self._model(data)
                 loss1 = self._loss(output1, target1)
 
+                # output1pad = torch.cat([output1, data[:, -5:, 0]], 1)
+                # output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
+                
+                # holiday
                 output1pad = torch.cat([output1, data[:, -5:, 0]], 1)
-                output2 = self._model(torch.cat([data[:, :, 1:], output1pad.unsqueeze(2)], 2))
-                # temp_data = torch.cat((data[:,:self._itemnum,1:], output1.unsqueeze(-1)), 2)
-                # temp_data = torch.cat((temp_data, data[:,self._itemnum:, :]), 1)
-                # output2 = self._model(temp_data)
-
+                d21_holidaypad = torch.cat([d21_holiday, data[:, -5:, 0]], 1)
+                # output2 = self._model(torch.cat([data[:, :, 1:20], output1pad.unsqueeze(2), data[:, :, 21:], d21_holidaypad.unsqueeze(2)], 2))
+                 # holiday one
+                output2 = self._model(torch.cat([data[:, :, 1:20], output1pad.unsqueeze(2), d21_holidaypad.unsqueeze(2)], 2))
+                
                 loss2 = self._loss(output2, target2)
                 
+                total_val_output1.append(output1)
+                total_val_output2.append(output2)
+                total_val_target1.append(target1)
+                total_val_target2.append(target2)
+
                 total_val_loss_1 += loss1.item()
                 total_val_loss_2 += loss2.item()
-                total_val_metrics_1 += self._eval_metrics(output1, target1)
-                total_val_metrics_2  += self._eval_metrics(output2, target2)
+                # total_val_metrics_1 += self._eval_metrics(output1, target1)
+                # total_val_metrics_2  += self._eval_metrics(output2, target2)
 
                 # self._writer.set_step(
                 #     (epoch - 1) * len(self._valid_data_loader) + batch_idx,
@@ -162,8 +185,14 @@ class Trainer(BaseTrainer):
 
         # add histogram of model parameters to the tensorboard
         # for name, p in self._model.named_parameters():
-            # self._writer.add_histogram(name, p, bins='auto')
-
+        # self._writer.add_histogram(name, p, bins='auto')
+        total_val_output1 = torch.cat(total_val_output1, 0)
+        total_val_output2 = torch.cat(total_val_output2, 0)
+        total_val_target1 = torch.cat(total_val_target1, 0)
+        total_val_target2 = torch.cat(total_val_target2, 0)
+        total_val_metrics_1 = self._eval_metrics(total_val_output1, total_val_target1)
+        total_val_metrics_2 = self._eval_metrics(total_val_output2, total_val_target2)
+        
         return {
             'val_loss_1': total_val_loss_1 / len(self._valid_data_loader.dataset),
             'val_loss_2': total_val_loss_2 / len(self._valid_data_loader.dataset),

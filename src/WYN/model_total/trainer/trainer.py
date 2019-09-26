@@ -109,6 +109,8 @@ class Trainer(BaseTrainer):
         total_val_loss_2 = 0
         total_val_metrics_1 = torch.zeros(len(self._metrics))
         total_val_metrics_2 = torch.zeros(len(self._metrics))
+        total_val_output1 = []
+        total_val_target1 = []
         with torch.no_grad():
             # for batch_idx, (data, target1, target2) in enumerate(self._valid_data_loader):
             for batch_idx, (data, target1) in enumerate(self._valid_data_loader):
@@ -125,7 +127,10 @@ class Trainer(BaseTrainer):
                 
                 total_val_loss_1 += loss1.item()
                 # total_val_loss_2 += loss2.item()
-                total_val_metrics_1 += self._eval_metrics(output1, target1)
+                total_val_output1.append(output1)
+                total_val_target1.append(target1)
+                # total_val_metrics_1 += self._eval_metrics(output1, target1)
+
                 # total_val_metrics_2  += self._eval_metrics(output2, target2)
 
                 # self._writer.set_step(
@@ -139,7 +144,9 @@ class Trainer(BaseTrainer):
         # add histogram of model parameters to the tensorboard
         # for name, p in self._model.named_parameters():
             # self._writer.add_histogram(name, p, bins='auto')
-
+        total_val_output1 = torch.cat(total_val_output1, 0)
+        total_val_target1 = torch.cat(total_val_target1, 0)
+        total_val_metrics_1 = self._eval_metrics(total_val_output1, total_val_target1)
         return {
             'val_loss_1': total_val_loss_1 / len(self._valid_data_loader.dataset),
             # 'val_loss_2': total_val_loss_2 / len(self._valid_data_loader.dataset),

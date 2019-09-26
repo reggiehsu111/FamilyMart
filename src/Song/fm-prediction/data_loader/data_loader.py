@@ -17,9 +17,12 @@ class FamilyMartDataset(Dataset):
         # with open(data_dir / 'sales_data.pkl', 'rb') as file:
         #     self._sales_data = pickle.load(file)
         with open(data_dir / 'sales_data_pinfan.pkl', 'rb') as file:
-            self._sales_data = pickle.load(file)
+            self._sales_data = pickle.load(file)        
         # with open(data_dir / 'sales_data_qunfan.pkl', 'rb') as file:
         #     self._sales_data = pickle.load(file)
+        with open(data_dir / 'is_holiday.pkl', 'rb') as file:
+            self._is_holiday = pickle.load(file) 
+        self._is_holiday = torch.tensor(self._is_holiday, dtype = torch.float).repeat(12,1)
 
         with open(data_dir / 'commodity_codes.pkl', 'rb') as file:
             self._commodity_codes = pickle.load(file)
@@ -46,13 +49,31 @@ class FamilyMartDataset(Dataset):
         time_idx = int(idx/len(self._store_codes))
         store_idx = idx%len(self._store_codes)
 
-
         x_idx = time_idx + torch.tensor([i for i in range(self._time_window_size)])
         x = torch.cat((self._sales_data[x_idx, store_idx].transpose(0,1), store_code_onehot), 0)
 
         y1 = self._sales_data[time_idx + self._time_window_size + 1, store_idx]
 
         y2 = self._sales_data[time_idx + self._time_window_size + 2, store_idx]
+        # holiday
+        # holiday = self._is_holiday[:, x_idx]
+        # d21_holiday = self._is_holiday[:, x_idx[-1]+1]
+        # store_code_onehot = torch.zeros(len(self._store_codes), 40)
+        # store_code_onehot[idx % len(self._store_codes)] = 1
+        # x = torch.cat((self._sales_data[x_idx, store_idx].transpose(0,1), holiday), 1)
+        # x = torch.cat((x, store_code_onehot), 0)
+        # holiday one
+        holiday = self._is_holiday[:, x_idx[-1]+1]
+        d21_holiday = self._is_holiday[:, x_idx[-1]+2]
+        store_code_onehot = torch.zeros(len(self._store_codes), 21)
+        store_code_onehot[idx % len(self._store_codes)] = 1
+        # print(self._sales_data[x_idx, store_idx].transpose(0,1).shape)
+        
+        x = torch.cat((self._sales_data[x_idx, store_idx].transpose(0,1), holiday.view(-1,1)), 1)
+        x = torch.cat((x, store_code_onehot), 0)
+
+        return x, y1, y2, d21_holiday
+
         return x, y1, y2
 
 class FamilyMartDataLoader(BaseDataLoader):

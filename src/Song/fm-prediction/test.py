@@ -101,8 +101,11 @@ def main(config):
     hist_real = []
 
     with torch.no_grad():
-        for i, (data, target, target_2) in enumerate(tqdm(data_loader)):
-            data, target, target_2 = data.to(device), target.to(device), target_2.to(device)
+        # for i, (data, target, target_2) in enumerate(tqdm(data_loader)):
+        #     data, target, target_2 = data.to(device), target.to(device), target_2.to(device)
+        # holiday
+        for i, (data, target, target_2, d21_holiday) in enumerate(tqdm(data_loader)):
+            data, target, target_2, d21_holiday = data.to(device), target.to(device), target_2.to(device), d21_holiday.to(device)
             output = model(data)
             # print(data.shape)
             # output_1 = torch.round(output * std + mean)
@@ -110,12 +113,14 @@ def main(config):
             # temp_data = torch.cat((temp_data, data[:,itemnum:, :]), 1)
             # output_2 = model(temp_data)
 
+            # output_1_pad = torch.cat([output, data[:, -5:, 0]], 1)
+            # output_2 = model(torch.cat([data[:, :, 1:], output_1_pad.unsqueeze(2)], 2))
+            # holiday
             output_1_pad = torch.cat([output, data[:, -5:, 0]], 1)
-            output_2 = model(torch.cat([data[:, :, 1:], output_1_pad.unsqueeze(2)], 2))
-
-            # hist_pred.append(output_1)
-            # # hist_pred.append(output * std + mean)
-            # hist_real.append(target * std + mean)
+            d21_holidaypad = torch.cat([d21_holiday, data[:, -5:, 0]], 1)
+            # output_2 = model(torch.cat([data[:, :, 1:20], output_1_pad.unsqueeze(2), data[:, :, 21:], d21_holidaypad.unsqueeze(2)], 2))
+            # holiday one
+            output_2 = model(torch.cat([data[:, :, 1:20], output_1_pad.unsqueeze(2), d21_holidaypad.unsqueeze(2)], 2))
 
             # computing loss, metrics on test set
             loss = loss_fn(output, target)

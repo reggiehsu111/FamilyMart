@@ -50,7 +50,6 @@ class preprocessor:
         processed_order_data = []
 
         self.__append_features__()
-        return
         self.__get_daily_data__()
         self.__remove_zero_row__()
 

@@ -1,4 +1,10 @@
-1. L1Loss or MSELoss?
-2. one-hot encodding network level?
-3. round makes result better
-4. add/remove features won't change the result
+1. L1Loss or MSELoss? V
+2. one-hot encodding network level? 
+3. round makes result better V make sense if our model is accurate (round project the solution into the right space)
+4. add/remove features won't change the result V change (65%->60%)
+
+
+TODO(2019/09/26):
+1. add testing and observe
+2. RNN
+3. add Ping group prediction (chagne network maybe? something like 1 item is all 20-day data of commodity in the Ping group)

@@ -53,8 +53,8 @@ class FamilyMartDataset(Dataset):
         day_in_year_onehot = torch.zeros(365)
         day_in_week_onehot = torch.zeros(7)
         
-        day_in_year_onehot[day_axis % 365] = 1
-        day_in_week_onehot[day_axis % 7] = 1
+        day_in_year_onehot[(day_axis+self._time_window_size) % 365] = 1
+        day_in_week_onehot[(day_axis+self._time_window_size) % 7] = 1
 
         x = torch.cat((features, day_in_year_onehot, day_in_week_onehot, days_window), dim=0)
 

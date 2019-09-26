@@ -27,11 +27,15 @@ class FCModel(BaseModel):
 
         self.all_net = nn.Sequential(
 
-            nn.Linear( STORE_DIM[1] + COMMIDITY_DIM[1] + PING_DIM[1] + CHING_DIM[1] + DAY_IN_YEAR_DIM[1] + DAY_IN_WEEK_DIM[1] + WINDOW_SIZE, 256),
-            # nn.BatchNorm1d(512),
-            # nn.ReLU(),
+            nn.Linear( STORE_DIM[1] + COMMIDITY_DIM[1] + PING_DIM[1] + CHING_DIM[1] + DAY_IN_YEAR_DIM[1] + DAY_IN_WEEK_DIM[1] + WINDOW_SIZE, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU(),
 
-            # nn.Linear(512, 256),
+            nn.Linear(512, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU(),
+
+            nn.Linear(512, 256),
             nn.BatchNorm1d(256),
             nn.ReLU(),
 
@@ -40,7 +44,6 @@ class FCModel(BaseModel):
             nn.ReLU(),
 
             nn.Linear(64, 1),
-            nn.ReLU()
         )
 
         self.store_net = nn.Sequential(
@@ -88,5 +91,4 @@ class FCModel(BaseModel):
         dwn = self.day_week_net(x[:, STORE_DIM[0] + COMMIDITY_DIM[0] + PING_DIM[0] + CHING_DIM[0] + DAY_IN_YEAR_DIM[0]:STORE_DIM[0] + COMMIDITY_DIM[0] + PING_DIM[0] + CHING_DIM[0] + DAY_IN_YEAR_DIM[0] + DAY_IN_WEEK_DIM[0]])
         
         y = self.all_net( torch.cat((sn, cn, pin, cin, dyn, dwn, x[:, -WINDOW_SIZE:]), dim=1) )
-
         return y

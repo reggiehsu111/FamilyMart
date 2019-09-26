@@ -37,7 +37,7 @@ def main(config):
     # setup data_loader instances
     data_loader = getattr(module_data, config['data_loader']['type'])(
         config['data_loader']['args']['data_dir'],
-        batch_size=128,
+        batch_size=1024,
         shuffle=False,
         train=False,
         validation_split_ratio=0.0,
@@ -66,20 +66,33 @@ def main(config):
     model.eval()
 
     with open(Path(config['data_loader']['args']['data_dir'])
-                   / 'sales_mean.pkl', 'rb') as file:
+                   / 'test_mean.pkl', 'rb') as file:
         mean = pickle.load(file)
     with open(Path(config['data_loader']['args']['data_dir'])
-                   / 'sales_std.pkl', 'rb') as file:
+                   / 'test_std.pkl', 'rb') as file:
         std = pickle.load(file)
+
+    with open(Path(config['data_loader']['args']['data_dir'])
+                   / 'train_mean.pkl', 'rb') as file:
+        train_mean = pickle.load(file)
+    with open(Path(config['data_loader']['args']['data_dir'])
+                   / 'train_std.pkl', 'rb') as file:
+        train_std = pickle.load(file)
 
     total_loss = 0.0
     total_metrics = torch.zeros(len(metric_fns))
 
-    hist_pred = []
-    hist_real = []
+    num_commodity = len(data_loader.dataset) // 140
+
+    hist_pred = [ [] for i in range(num_commodity) ]
+    hist_real = [ [] for i in range(num_commodity) ]
+    idx_counter = 0
+
     with torch.no_grad():
-        for i, (data, target, target_2) in enumerate(tqdm(data_loader)):
+        # for i, (data, target, target_2) in enumerate(tqdm(data_loader)):
+        for i, (data, target) in enumerate(tqdm(data_loader)):
             data, target = data.to(device), target.to(device)
+            
             output = model(data)
 
             output_1 = torch.round(output * std + mean)
@@ -88,9 +101,13 @@ def main(config):
 
             # output_2 = model(torch.cat([data[:, :, 1:], output_1_pad.unsqueeze(2)], 2))
 
-            hist_pred.append(output_1)
-            # hist_pred.append(output * std + mean)
-            hist_real.append(target * std + mean)
+            for j,num in enumerate(output_1):
+                hist_pred[ idx_counter ].append((int(num)))
+                # hist_pred.append(output * std + mean)
+                hist_real[ idx_counter ].append(int(target[j] * std + mean))
+                idx_counter += 1
+                if idx_counter == num_commodity:
+                    idx_counter = 0
 
             # computing loss, metrics on test set
             loss = loss_fn(output, target)
@@ -99,26 +116,12 @@ def main(config):
                 # total_metrics[i] += metric(output_2, target_2, mean, std)
                 total_metrics[i] += metric(output, target, mean, std)
 
-    hist_pred = torch.cat(hist_pred, 0)
-    hist_real = torch.cat(hist_real, 0)
-
     plt.xticks(
         range(0, 140, 10),
         [get_formatted_time(i) for i in range(2 * 365 - 142, 2 * 365 - 142 + 140, 10)],
         rotation=30,
         size=8
     )
-
-    for code in range(hist_real.shape[1]):
-
-        plt.scatter(range(0, 140), hist_pred[:140, code], label="pred", marker='s')
-        plt.scatter(range(0, 140), hist_real[:140, code], label="true", marker='o' )
-        plt.legend()
-        fig = plt.gcf()
-        # fig.set_size_inches(18.5, 10.5)
-        # plt.savefig('saved/vis/0.png', dpi=100)
-        plt.show()
-        # print(hist_pred[0, :100], hist_real[0, :100])
 
     n_samples = len(data_loader.dataset)
     log = {'loss': total_loss / n_samples}
@@ -129,12 +132,22 @@ def main(config):
 
     diff = 0
     summation = 0
-    hist_pred = hist_pred.numpy()
-    hist_real = hist_real.numpy()
-    for i in range(140):
-        diff += abs(hist_pred[i] - hist_real[i])
-        summation += hist_real[i]
+    for i in range(num_commodity):
+        for j in range(140):
+            diff += abs(hist_pred[i][j] - hist_real[i][j])
+            summation += hist_real[i][j]
     print(diff / summation)
+
+    for i in range(num_commodity):
+
+        plt.scatter(range(0, 140), hist_pred[i], label="pred", marker='s')
+        plt.scatter(range(0, 140), hist_real[i], label="true", marker='o' )
+        plt.legend()
+        # fig = plt.gcf()
+        # fig.set_size_inches(18.5, 10.5)
+        # plt.savefig('saved/vis/0.png', dpi=100)
+        # plt.show()
+        # print(hist_pred[0, :100], hist_real[0, :100])
 
 
 if __name__ == '__main__':

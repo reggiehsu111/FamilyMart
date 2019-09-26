@@ -19,7 +19,7 @@
     "optimizer": {
         "type": "Adam",
         "args":{
-            "lr": 0.001,
+            "lr": 0.01,
             "weight_decay": 0,
             "amsgrad": true
         }
@@ -43,7 +43,7 @@
         "verbosity": 2,
         
         "monitor": "min val_err",
-        "early_stop": 10,
+        "early_stop": 20,
 
         "tensorboard": true
     }

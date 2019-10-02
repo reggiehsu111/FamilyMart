@@ -36,6 +36,7 @@ class FamilyMartDataset(Dataset):
         with open(data_dir / 'feature_data.pkl', 'rb') as file:
                 self._feature_data = pickle.load(file)
 
+
     def __len__(self):
         
         '''

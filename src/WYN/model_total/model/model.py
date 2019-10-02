@@ -34,6 +34,7 @@ class FCModel(BaseModel):
             nn.Linear(512, 512),
             nn.BatchNorm1d(512),
             nn.ReLU(),
+            nn.Dropout(0.25),
 
             nn.Linear(512, 256),
             nn.BatchNorm1d(256),
@@ -46,6 +47,7 @@ class FCModel(BaseModel):
             nn.Linear(256, 64),
             nn.BatchNorm1d(64),
             nn.ReLU(),
+            nn.Dropout(0.25),
 
             nn.Linear(64, 64),
             nn.BatchNorm1d(64),
@@ -54,6 +56,7 @@ class FCModel(BaseModel):
             nn.Linear(64, 64),
             nn.BatchNorm1d(64),
             nn.ReLU(),
+            nn.Dropout(0.3),
 
             nn.Linear(64, 1),
         )

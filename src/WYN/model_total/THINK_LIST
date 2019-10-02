@@ -8,3 +8,7 @@ TODO(2019/09/26):
 1. add testing and observe V
 2. RNN
 3. add Ping group prediction (chagne network maybe? something like 1 item is all 20-day data of commodity in the Ping group)
+
+TODO(2019/9/27):
+1. predict Ping group
+    

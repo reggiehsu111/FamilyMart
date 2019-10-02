@@ -9,6 +9,7 @@ NUM_STORE = 5
 NUM_COMMODITY = 759
 NUM_PING = 12
 NUM_CHING = 37
+two_years = 365*2
 
 class preprocessor:
     def __init__(self):
@@ -42,7 +43,6 @@ class preprocessor:
         feature_data [num_valid_commodity, NUM_STORE + NUM_COMMODITY + NUM_PING + NUM_CHING (one-hot encoding)]
         '''
 
-        two_years = 365*2
         axis_0 = len(self.store_codes) * len(self.commodity_codes)
         axis_1 = two_years + NUM_STORE + NUM_COMMODITY + NUM_PING + NUM_CHING
 
@@ -52,6 +52,7 @@ class preprocessor:
         self.__append_features__()
         self.__get_daily_data__()
         self.__remove_zero_row__()
+        self.__sort_feature__()
 
         train_data = torch.tensor(self.processed_sales_data[:, :two_years-140], dtype=torch.float)
         test_data = torch.tensor(self.processed_sales_data[:, two_years-140-20:two_years], dtype=torch.float)
@@ -79,7 +80,85 @@ class preprocessor:
         with open(self.output_dir / 'feature_data.pkl', 'wb') as file:
             pickle.dump(feature_data, file)
         
+    def aggregate_Ping(self):
 
+        with open(self.output_dir / 'train_data.pkl', 'rb') as file:
+            train_data = pickle.load(file)
+        with open(self.output_dir / 'train_mean.pkl', 'rb') as file:
+            train_mean = pickle.load(file)
+        with open(self.output_dir / 'train_std.pkl', 'rb') as file:
+            train_std =  pickle.load(file)
+
+        with open(self.output_dir / 'test_data.pkl', 'rb') as file:
+            test_data = pickle.load(file)
+        with open(self.output_dir / 'test_mean.pkl', 'rb') as file:
+            test_mean = pickle.load(file)
+        with open(self.output_dir / 'test_std.pkl', 'rb') as file:
+            test_std = pickle.load(file)
+
+        with open(self.output_dir / 'feature_data.pkl', 'rb') as file:
+            feature_data = pickle.load(file)        
+
+        train_data = train_data * train_std + train_mean
+        test_data = test_data * test_std + test_mean
+
+        new_train_data = list()
+        new_test_data = list()
+        new_feature = list()
+        tmp_train_data = torch.zeros_like(train_data[0])
+        tmp_test_data = torch.zeros_like(test_data[0])
+        tmp_feature = torch.zeros_like(feature_data[0])
+        prev_row_comparer = torch.zeros(NUM_STORE+NUM_PING)
+        for i, row in enumerate(feature_data):
+            if i == 0:
+                tmp_train_data += train_data[i]
+                tmp_test_data += test_data[i]
+                tmp_feature += row
+                prev_row_comparer = torch.cat((row[:NUM_STORE], row[NUM_STORE+NUM_COMMODITY:NUM_STORE+NUM_COMMODITY+NUM_PING]), dim=0)
+                continue
+            row_comparer = torch.cat((row[:NUM_STORE], row[NUM_STORE+NUM_COMMODITY:NUM_STORE+NUM_COMMODITY+NUM_PING]), dim=0)
+            the_same = torch.eq(prev_row_comparer, row_comparer).all()
+
+            if not the_same:
+                new_train_data.append(tmp_train_data)
+                new_test_data.append(tmp_test_data)
+                new_feature.append(torch.clamp(tmp_feature, min=0, max=1))
+                tmp_train_data = torch.zeros_like(train_data[0])
+                tmp_test_data = torch.zeros_like(test_data[0])
+                tmp_feature = torch.zeros_like(feature_data[0])
+
+            tmp_train_data += train_data[i]
+            tmp_test_data += test_data[i]
+            tmp_feature += row
+            prev_row_comparer = row_comparer
+
+        new_train_data.append(tmp_train_data)
+        new_test_data.append(tmp_test_data)
+        new_feature.append(torch.clamp(tmp_feature, min=0, max=1))
+        
+        train_data = torch.stack(new_train_data)
+        test_data = torch.stack(new_test_data)
+        feature_data = torch.stack(new_feature)
+
+        train_mean, train_std, train_data = self.__normalize__(train_data)
+        test_mean, test_std, test_data = self.__normalize__(test_data)  
+
+        with open(self.output_dir / 'Ping/train_data.pkl', 'wb') as file:
+            pickle.dump(train_data, file)
+        with open(self.output_dir / 'Ping/train_mean.pkl', 'wb') as file:
+            pickle.dump(train_mean, file)
+        with open(self.output_dir / 'Ping/train_std.pkl', 'wb') as file:
+            pickle.dump(train_std, file)
+
+        with open(self.output_dir / 'Ping/test_data.pkl', 'wb') as file:
+            pickle.dump(test_data, file)
+        with open(self.output_dir / 'Ping/test_mean.pkl', 'wb') as file:
+            pickle.dump(test_mean, file)
+        with open(self.output_dir / 'Ping/test_std.pkl', 'wb') as file:
+            pickle.dump(test_std, file)
+
+        with open(self.output_dir / 'Ping/feature_data.pkl', 'wb') as file:
+            pickle.dump(feature_data, file)
 
     def __get_valid_commodity_codes__(self, commodity_dataframe):
 
@@ -170,6 +249,41 @@ class preprocessor:
 
         np.delete(self.processed_sales_data, del_idx, 0)
 
+    def __sort_feature__(self):
+
+        def cmp_to_key(mycmp):
+            'Convert a cmp= function into a key= function'
+            class K:
+                def __init__(self, obj, *args):
+                    self.obj = obj
+                def __lt__(self, other):
+                    return mycmp(self.obj, other.obj) < 0
+                def __gt__(self, other):
+                    return mycmp(self.obj, other.obj) > 0
+                def __eq__(self, other):
+                    return mycmp(self.obj, other.obj) == 0
+                def __le__(self, other):
+                    return mycmp(self.obj, other.obj) <= 0
+                def __ge__(self, other):
+                    return mycmp(self.obj, other.obj) >= 0
+                def __ne__(self, other):
+                    return mycmp(self.obj, other.obj) != 0
+            return K
+
+        def feature_cmp(x, y):
+            for i in range(two_years, two_years+NUM_STORE):
+                if x[i] != y[i]:
+                    return y[i] - x[i]
+            for i in range(two_years+NUM_STORE+NUM_COMMODITY, two_years+NUM_STORE+NUM_COMMODITY+NUM_PING+NUM_CHING):
+                if x[i] != y[i]:
+                    return y[i] - x[i]   
+            for i in range(two_years+NUM_STORE, two_years+NUM_STORE+NUM_COMMODITY):
+                if x[i] != y[i]:
+                    return y[i] - x[i]
+            return 0     
+        print("sorting...")
+        self.processed_sales_data = np.array(sorted(self.processed_sales_data, key=cmp_to_key(feature_cmp)))
+
     def __get_one_hot__(self, codebook, target):
 
         if target not in codebook:
@@ -221,4 +335,5 @@ def get_valid_commodity_codes(commodity_dataframe, sales_data):
 
 if __name__ == '__main__':
     pc = preprocessor()
-    pc.generate()
+    # pc.generate()
+    pc.aggregate_Ping()

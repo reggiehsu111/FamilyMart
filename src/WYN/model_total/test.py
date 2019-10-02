@@ -102,9 +102,12 @@ def main(config):
             # output_2 = model(torch.cat([data[:, :, 1:], output_1_pad.unsqueeze(2)], 2))
 
             for j,num in enumerate(output_1):
-                hist_pred[ idx_counter ].append((int(num)))
+                # print(num, int(num), int(target[j] * std + mean))
+                # input()
+                hist_pred[ idx_counter ].append(num.numpy()[0])
                 # hist_pred.append(output * std + mean)
-                hist_real[ idx_counter ].append(int(target[j] * std + mean))
+                num2 = target[j] * std + mean
+                hist_real[ idx_counter ].append(num2.numpy()[0])
                 idx_counter += 1
                 if idx_counter == num_commodity:
                     idx_counter = 0
@@ -137,12 +140,20 @@ def main(config):
             diff += abs(hist_pred[i][j] - hist_real[i][j])
             summation += hist_real[i][j]
     print(diff / summation)
-
     for i in range(num_commodity):
-
-        plt.scatter(range(0, 140), hist_pred[i], label="pred", marker='s')
-        plt.scatter(range(0, 140), hist_real[i], label="true", marker='o' )
-        plt.legend()
+        
+        diff = 0
+        summation = 0
+        if len(hist_pred[i]) != 140:
+            print("error!")
+            break
+        for j in range(140):
+            diff += abs(hist_pred[i][j] - hist_real[i][j])
+            summation += hist_real[i][j]
+        # print(i, diff, summation, sep=",")
+        # plt.scatter(range(0, 140), hist_pred[i], label="pred", marker='s')
+        # plt.scatter(range(0, 140), hist_real[i], label="true", marker='o' )
+        # plt.legend()
         # fig = plt.gcf()
         # fig.set_size_inches(18.5, 10.5)
         # plt.savefig('saved/vis/0.png', dpi=100)

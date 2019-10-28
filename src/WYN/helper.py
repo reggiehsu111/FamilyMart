@@ -10,7 +10,8 @@ class helper():
         self.is_transform = args.transform
         self.is_correlate = args.correlation
         
-        self.df = pd.read_csv(self.file_name, sep='\t')
+        with open(self.file_name, 'r', encoding='utf-8') as f:
+            self.df = pd.read_csv(f, sep='\t')
 
     def run(self):
 
@@ -39,7 +40,8 @@ class helper():
 
             if shop_code != prev_shop_code or product_code != prev_product_code:
                 if self.type == "訂貨":
-                    self.transformed_table.append(["0/0" for i in range(365+2)]) # no leap year in 2017~2018
+                    # self.transformed_table.append(["0/0" for i in range(365+2)]) # no leap year in 2017~2018
+                    self.transformed_table.append([0 for i in range(365+2)]) # consider 訂貨 only
                 else:
                     self.transformed_table.append([0 for i in range(365+2)]) # no leap year in 2017~2018
                 self.transformed_table[-1][0] = shop_code
@@ -55,7 +57,8 @@ class helper():
             if self.type == "廢棄" or self.type == "銷售":
                 self.transformed_table[-1][idx] = df_agged[i, 1]
             elif self.type == "訂貨":
-                self.transformed_table[-1][idx] = str(df_agged[i, 0]) + "/" + str(df_agged[i, 1])
+                # self.transformed_table[-1][idx] = str(df_agged[i, 0]) + "/" + str(df_agged[i, 1])
+                self.transformed_table[-1][idx] = df_agged[i, 0]
             else:
                 self.transformed_table[-1][idx] = df_agged[i, 0]                
 
